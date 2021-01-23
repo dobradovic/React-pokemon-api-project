@@ -1,3 +1,11 @@
 .Pokemons {
-	color: red;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+
+	.Pokemon {
+		background: cornflowerblue;
+		flex: 0 1 calc(33% - 1rem);
+	}
 }
