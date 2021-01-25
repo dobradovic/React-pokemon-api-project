@@ -3,9 +3,39 @@
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: wrap;
+	padding: 2rem;
 
 	.Pokemon {
-		background: cornflowerblue;
-		flex: 0 1 calc(33% - 1rem);
+		flex: 0 1 calc(25% - 1rem);
+		text-align: center;
+		padding: 0.8rem;
+		margin-top: 1rem;
+		background: #fff;
+		border-radius: 0.25rem;
+		margin: 2rem 0;
+		box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+		transition: all 0.3s linear;
+		text-decoration: none;
+		font-size: 1rem;
+		color: black;
+		color: #ffcb05;
+		text-transform: uppercase;
+
+		&:hover {
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+			.PokemonTitle {
+				color: #2a75bb;
+			}
+		}
+		& img {
+			width: 100%;
+			height: 20rem;
+			object-fit: cover;
+			border-top-right-radius: 0.25rem;
+			border-top-left-radius: 0.25rem;
+		}
+		& .footer {
+			padding: 1.5rem 2rem;
+		}
 	}
 }

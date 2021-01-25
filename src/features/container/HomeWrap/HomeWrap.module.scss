@@ -1,0 +1,28 @@
+body {
+	background: rgb(240, 239, 239);
+}
+.Header {
+	background: #ffcb05;
+
+	min-height: 100px;
+	text-align: center;
+	border-bottom: 2px solid #49a6e9;
+	.HeaderTitle {
+		font-size: 2rem;
+	}
+	h3 {
+		color: black;
+		padding: 1.5rem;
+	}
+	img {
+		height: 80px;
+		margin-top: 0.6rem;
+	}
+}
+
+.Footer {
+	background: #49a6e9;
+	color: white;
+	min-height: 20px;
+	text-align: center;
+}
