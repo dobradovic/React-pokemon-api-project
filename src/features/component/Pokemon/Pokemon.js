@@ -3,9 +3,13 @@ import classes from "./Pokemon.module.scss";
 import axiosPokemons from "../../../axios/axiosPokemons";
 import PokemonImg from "../../../assets/images/pokemon1.jpg";
 import Loader from "../UI/Loader/Loader";
+import { Modal, useModal, ModalTransition } from "react-simple-hook-modal";
+import "react-simple-hook-modal/dist/styles.css";
 
 function Pokemon(props) {
 	const { name } = props.match.params;
+	const { isModalOpen, openModal, closeModal } = useModal();
+	const [pokemonsByType, setPokemonsByType] = useState([]);
 
 	const [pokemon, setPokemon] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -15,6 +19,7 @@ function Pokemon(props) {
 		axiosPokemons
 			.get(`/pokemon/${name}`)
 			.then((res) => {
+				console.log(res);
 				setPokemon(res.data);
 				setIsLoading(false);
 			})
@@ -23,50 +28,77 @@ function Pokemon(props) {
 				setIsLoading(false);
 			});
 	}, []);
-	console.log(pokemon);
+
+	const typeHandler = (event) => {
+		setIsLoading(true);
+		axiosPokemons
+			.get(`type/${event.target.innerText}`)
+			.then((res) => {
+				setPokemonsByType(res.data.pokemon);
+				setIsLoading(false);
+			})
+			.catch((err) => {
+				console.log(err);
+				setIsLoading(false);
+			});
+		openModal();
+	};
+
+	const pokemonByTypeShow = pokemonsByType.map((pokemon) => {
+		return <span key={pokemon.pokemon.name}>{pokemon.pokemon.name}</span>;
+	});
+
 	const pokemonType = pokemon.types
 		? pokemon.types.map((type) => {
 				return (
-					<a href="#" key={type.type.name}>
+					<span key={type.type.name} onClick={typeHandler}>
 						{type.type.name}
-					</a>
+					</span>
 				);
 		  })
 		: "";
 	const pokemonAbility = pokemon.abilities
 		? pokemon.abilities.map((ability) => {
-				return (
-					<a href="#" key={ability.ability.name}>
-						{ability.ability.name}
-					</a>
-				);
+				return <span key={ability.ability.name}>{ability.ability.name}</span>;
 		  })
 		: "";
 	return (
-		<main>
-			{isLoading ? (
-				<Loader />
-			) : (
-				<article className={classes.SinglePokemon}>
-					<img src={PokemonImg} alt="img" />
-					<div className={classes.PokemonDescription}>
-						<h1 className={classes.PokemonTitle}>{pokemon.name}</h1>
-					</div>
-					<span className={classes.PokemonType}>
-						{pokemonType}
-						<p className={classes.PokemonAbilityType}>Type : </p>
-					</span>
-					<span className={classes.PokemonAbility}>
-						{pokemonAbility}
-						<p className={classes.PokemonAbilityTitle}>Abilities : </p>
-					</span>
-				</article>
-			)}
+		<>
+			<Modal
+				id="any-unique-identifier"
+				isOpen={isModalOpen}
+				transition={ModalTransition.BOTTOM_UP}
+			>
+				{/* <button onClick={openModal}>Open</button> */}
+				<button onClick={closeModal}>X</button>
+				{isLoading ? <Loader /> : pokemonByTypeShow}
+			</Modal>
 
-			<a href="/" className={classes.LinkGoBack}>
-				<button className={classes.BtnGoBack}>Go back</button>
-			</a>
-		</main>
+			<main>
+				{isLoading ? (
+					<Loader />
+				) : (
+					<article className={classes.SinglePokemon}>
+						<img src={PokemonImg} alt="img" />
+						<div className={classes.PokemonDescription}>
+							<h1 className={classes.PokemonTitle}>{pokemon.name}</h1>
+						</div>
+						<span className={classes.PokemonType}>
+							{pokemonType}
+							<p className={classes.PokemonAbilityType}>Type : </p>
+						</span>
+						<span className={classes.PokemonAbility}>
+							{pokemonAbility}
+							<p className={classes.PokemonAbilityTitle}>Abilities : </p>
+						</span>
+					</article>
+				)}
+
+				<a href="/" className={classes.LinkGoBack}>
+					<button className={classes.BtnGoBack}>Go back</button>
+				</a>
+			</main>
+		</>
 	);
 }
 
