@@ -3,6 +3,8 @@ import classes from "./Pokemons.module.scss";
 import Loader from "../UI/Loader/Loader";
 import axiosPokemons from "../../../axios/axiosPokemons";
 import { Link } from "react-router-dom";
+import Filters from "../Filters/Filters";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 function Pokemons() {
 	const [pokemons, setPokemons] = useState([]);
@@ -29,15 +31,18 @@ function Pokemons() {
 				className={classes.Pokemon}
 				key={pokemon.name}
 			>
-				{pokemon.name}
+				<p className={classes.PokemonTitle}>{pokemon.name}</p>
 			</Link>
 		);
 	});
 
 	return (
-		<div className={classes.Pokemons}>
-			{isLoading ? <Loader /> : pokemonList}
-		</div>
+		<>
+			<Filters></Filters>
+			<div className={classes.Pokemons}>
+				{isLoading ? <Loader /> : pokemonList}
+			</div>
+		</>
 	);
 }
 

@@ -1,0 +1,25 @@
+.FilterOptions {
+	background: #fff;
+	display: flex;
+	margin: 2rem auto 0 auto;
+	max-width: 600px;
+	min-height: 100px;
+	border-radius: 2px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	align-items: center;
+	justify-content: space-around;
+	.FiltersFormBlock {
+		display: flex;
+		flex-direction: column;
+		.FilterLabel {
+			color: #2a75bb;
+		}
+		.FilterInput {
+			border: none;
+			border-bottom: 0.1rem solid #ffcb05;
+			padding: 0.3rem 0.4rem;
+			font-size: 0.9rem;
+			outline: none;
+		}
+	}
+}
