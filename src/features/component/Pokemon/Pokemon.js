@@ -5,6 +5,10 @@ import PokemonImg from "../../../assets/images/pokemon1.jpg";
 import Loader from "../UI/Loader/Loader";
 import { Modal, useModal, ModalTransition } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
+import Slider from "react-slick";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Pokemon(props) {
 	const { name } = props.match.params;
@@ -13,6 +17,14 @@ function Pokemon(props) {
 
 	const [pokemon, setPokemon] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+
+	var settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+	};
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -80,6 +92,24 @@ function Pokemon(props) {
 				) : (
 					<article className={classes.SinglePokemon}>
 						<img src={PokemonImg} alt="img" />
+						<Slider {...settings}>
+							{pokemon.sprites
+								? Object.entries(pokemon.sprites).map(([key, value]) => {
+										if (value && typeof value === "string")
+											return (
+												<div class="sliderWrap">
+													<img
+														key={key}
+														src={value}
+														width="100%"
+														height="100%"
+														className="yours-custom-class"
+													/>
+												</div>
+											);
+								  })
+								: ""}
+						</Slider>
 						<div className={classes.PokemonDescription}>
 							<h1 className={classes.PokemonTitle}>{pokemon.name}</h1>
 						</div>
