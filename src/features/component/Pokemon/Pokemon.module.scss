@@ -40,7 +40,7 @@ main {
 			color: #49a6e9;
 			margin-bottom: 1rem;
 		}
-		a {
+		span {
 			margin-right: 0.8rem;
 			background: #ebf7ff;
 			padding: 0.25rem 0.5rem;
@@ -48,9 +48,10 @@ main {
 			color: #49a6e9;
 			margin-bottom: 1rem;
 			text-decoration: none;
-		}
-		a:hover {
-			background: #ffcb05;
+			&:hover {
+				background: #ffcb05;
+				cursor: pointer;
+			}
 		}
 	}
 	.PokemonAbility {
@@ -64,7 +65,7 @@ main {
 			color: rgb(243, 182, 39);
 			margin-bottom: 1rem;
 		}
-		a {
+		span {
 			margin-right: 0.8rem;
 			background: #f3e2bf;
 			padding: 0.25rem 0.5rem;
@@ -73,7 +74,7 @@ main {
 			margin-bottom: 1rem;
 			text-decoration: none;
 		}
-		a:hover {
+		span:hover {
 			background: #ffcb05;
 		}
 	}
