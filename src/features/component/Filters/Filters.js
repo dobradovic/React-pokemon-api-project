@@ -3,6 +3,10 @@ import classes from "./Filters.module.scss";
 import axiosPokemons from "../../../axios/axiosPokemons";
 
 function Filters() {
+	const searchName = (event) => {
+		console.log(event.target.value);
+	};
+
 	return (
 		<>
 			<div className={classes.FilterOptions}>
@@ -12,6 +16,7 @@ function Filters() {
 						type="text"
 						className={classes.FilterInput}
 						placeholder="Pokemon name..."
+						onChange={searchName}
 					></input>
 				</div>
 				<div className={classes.FiltersFormBlock}>

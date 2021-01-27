@@ -6,7 +6,7 @@
 	padding: 2rem;
 
 	.Pokemon {
-		flex: 0 1 calc(25% - 1rem);
+		flex: 0 1 calc(33% - 1rem);
 		text-align: center;
 		padding: 0.8rem;
 		margin-top: 1rem;
@@ -29,7 +29,7 @@
 		}
 		& img {
 			width: 100%;
-			height: 20rem;
+			height: 25rem;
 			object-fit: cover;
 			border-top-right-radius: 0.25rem;
 			border-top-left-radius: 0.25rem;
@@ -37,5 +37,58 @@
 		& .footer {
 			padding: 1.5rem 2rem;
 		}
+		@media screen and (max-width: 768px) {
+			flex: 0 1 calc(50% - 1rem);
+		}
+		@media screen and (max-width: 380px) {
+			flex: 0 1 calc(100% - 1rem);
+		}
+	}
+}
+
+.FilterOptions {
+	background: #fff;
+	display: flex;
+	margin: 2rem auto 0 auto;
+	max-width: 60vw;
+	min-height: 100px;
+	border-radius: 2px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	align-items: center;
+	justify-content: space-around;
+	.FiltersFormBlock {
+		display: flex;
+		flex-direction: column;
+		.FilterLabel {
+			color: #2a75bb;
+		}
+		.FilterInput {
+			border: none;
+			border-bottom: 0.1rem solid #ffcb05;
+			padding: 0.3rem 0.4rem;
+			font-size: 0.9rem;
+			outline: none;
+		}
+		@media screen and (max-width: 380px) {
+			margin-bottom: 1.5rem;
+		}
+		@media screen and (max-width: 768px) {
+			margin-bottom: 1.5rem;
+		}
+	}
+	@media screen and (max-width: 768px) {
+		display: flex;
+		flex-direction: column;
+		flex: 0 1 calc(50% - 1rem);
+		align-items: stretch;
+		padding: 1.5rem;
+	}
+	@media screen and (max-width: 380px) {
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+		flex: 0 1 calc(100% - 1rem);
+		align-items: stretch;
+		padding: 1.5rem;
 	}
 }

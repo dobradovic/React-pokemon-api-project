@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Pokemon.module.scss";
 import axiosPokemons from "../../../axios/axiosPokemons";
-import PokemonImg from "../../../assets/images/pokemon1.jpg";
 import Loader from "../UI/Loader/Loader";
 import { Modal, useModal, ModalTransition } from "react-simple-hook-modal";
 import "react-simple-hook-modal/dist/styles.css";
@@ -17,6 +16,19 @@ function Pokemon(props) {
 
 	const [pokemon, setPokemon] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const modalStyle = {
+		color: "gold",
+		textAlign: "center",
+		marginBottom: "1rem",
+	};
+
+	const modalStylePokemons = {
+		color: "orange",
+		display: "flex",
+		flexDirection: "column",
+		textAlign: "center",
+	};
 
 	var settings = {
 		dots: true,
@@ -63,17 +75,23 @@ function Pokemon(props) {
 	const pokemonType = pokemon.types
 		? pokemon.types.map((type) => {
 				return (
-					<span key={type.type.name} onClick={typeHandler}>
+					<span
+						key={type.type.name}
+						className={classes.ShowPokemonsByType}
+						onClick={typeHandler}
+					>
 						{type.type.name}
 					</span>
 				);
 		  })
 		: "";
+
 	const pokemonAbility = pokemon.abilities
 		? pokemon.abilities.map((ability) => {
 				return <span key={ability.ability.name}>{ability.ability.name}</span>;
 		  })
 		: "";
+
 	return (
 		<>
 			<Modal
@@ -81,9 +99,17 @@ function Pokemon(props) {
 				isOpen={isModalOpen}
 				transition={ModalTransition.BOTTOM_UP}
 			>
-				{/* <button onClick={openModal}>Open</button> */}
 				<button onClick={closeModal}>X</button>
-				{isLoading ? <Loader /> : pokemonByTypeShow}
+				{isLoading ? (
+					<Loader />
+				) : (
+					<div>
+						<h3 style={modalStyle}>
+							Pokemons by choosen type: - {pokemonByTypeShow.length}
+						</h3>
+						<div style={modalStylePokemons}>{pokemonByTypeShow}</div>
+					</div>
+				)}
 			</Modal>
 
 			<main>
@@ -91,13 +117,12 @@ function Pokemon(props) {
 					<Loader />
 				) : (
 					<article className={classes.SinglePokemon}>
-						<img src={PokemonImg} alt="img" />
 						<Slider {...settings}>
 							{pokemon.sprites
 								? Object.entries(pokemon.sprites).map(([key, value]) => {
 										if (value && typeof value === "string")
 											return (
-												<div class="sliderWrap">
+												<div className="sliderWrap" key={key}>
 													<img
 														key={key}
 														src={value}

@@ -7,18 +7,20 @@ main {
 		box-shadow: 1rem;
 		transition: 1rem;
 		border-radius: 1rem;
-	}
-	.SinglePokemon img {
-		width: 100%;
-		height: 20rem;
-		object-fit: cover;
-		border-top-right-radius: 1rem;
-		border-top-left-radius: 1rem;
+
+		& img {
+			width: 100%;
+			height: 25rem;
+			object-fit: cover;
+			border-top-right-radius: 1rem;
+			border-top-left-radius: 1rem;
+		}
 	}
 	.PokemonDescription {
 		color: black;
 		background: #fff;
 		text-align: center;
+		margin-top: 2rem;
 		.PokemonTitle {
 			margin-top: 0.4rem;
 			letter-spacing: 0.3rem;
@@ -53,6 +55,14 @@ main {
 				cursor: pointer;
 			}
 		}
+		@media screen and (max-width: 568px) {
+			flex-direction: column-reverse;
+			padding: 1rem;
+		}
+		@media screen and (max-width: 380px) {
+			flex-direction: column-reverse;
+			padding: 1rem;
+		}
 	}
 	.PokemonAbility {
 		display: flex;
@@ -77,6 +87,18 @@ main {
 		span:hover {
 			background: #ffcb05;
 		}
+		@media screen and (max-width: 568px) {
+			flex-direction: column-reverse;
+			padding: 1rem;
+		}
+		@media screen and (max-width: 380px) {
+			flex-direction: column-reverse;
+			padding: 1rem;
+		}
+	}
+	.ShowPokemonsByType {
+		display: flex;
+		color: #ffcb05;
 	}
 	.LinkGoBack {
 		text-decoration: none;
@@ -95,5 +117,9 @@ main {
 			background: #49a6e9;
 			border: 0;
 		}
+	}
+	.ModalPopUp {
+		text-align: center;
+		background: red;
 	}
 }
