@@ -1,3 +1,5 @@
+@import "../../../sass/variables.scss";
+
 .Pokemons {
 	display: flex;
 	justify-content: space-between;
@@ -18,13 +20,13 @@
 		text-decoration: none;
 		font-size: 1rem;
 		color: black;
-		color: #ffcb05;
+		color: $yellow;
 		text-transform: uppercase;
 
 		&:hover {
 			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 			.PokemonTitle {
-				color: #2a75bb;
+				color: $blue;
 			}
 		}
 		& img {
@@ -44,6 +46,37 @@
 			flex: 0 1 calc(100% - 1rem);
 		}
 	}
+	.Message {
+		margin: 2rem auto;
+		color: $blue;
+	}
+}
+.Pagination {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: wrap;
+	width: 30vw;
+	text-decoration: none;
+	margin: 0 auto;
+	background: #d3d3d361;
+	padding: 0.5rem 0.8rem;
+	border-radius: 0.2rem;
+	margin-bottom: 1rem;
+	a {
+		text-decoration: none;
+		color: $blue;
+		&:hover {
+			color: $yellow;
+		}
+	}
+
+	@media (max-width: 380px) {
+		width: 50vw;
+	}
+	@media (max-width: 768px) {
+		width: 80vw;
+	}
 }
 
 .FilterOptions {
@@ -60,11 +93,11 @@
 		display: flex;
 		flex-direction: column;
 		.FilterLabel {
-			color: #2a75bb;
+			color: $blue;
 		}
 		.FilterInput {
 			border: none;
-			border-bottom: 0.1rem solid #ffcb05;
+			border-bottom: 0.1rem solid $yellow;
 			padding: 0.3rem 0.4rem;
 			font-size: 0.9rem;
 			outline: none;

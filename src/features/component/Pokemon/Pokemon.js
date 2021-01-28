@@ -120,6 +120,7 @@ function Pokemon(props) {
 						<Slider {...settings}>
 							{pokemon.sprites
 								? Object.entries(pokemon.sprites).map(([key, value]) => {
+										//umesto placeholdera - preskacem prikaz slike koja nema value
 										if (value && typeof value === "string")
 											return (
 												<div className="sliderWrap" key={key}>

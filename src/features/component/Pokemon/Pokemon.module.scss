@@ -1,3 +1,5 @@
+@import "../../../sass/variables.scss";
+
 main {
 	width: 90vw;
 	margin: 5rem auto;
@@ -27,7 +29,7 @@ main {
 			text-transform: uppercase;
 		}
 		h1 {
-			color: #ffcb05;
+			color: $yellow;
 		}
 	}
 	.PokemonType {
@@ -47,11 +49,11 @@ main {
 			background: #ebf7ff;
 			padding: 0.25rem 0.5rem;
 			border-radius: 5px;
-			color: #49a6e9;
+			color: $blue;
 			margin-bottom: 1rem;
 			text-decoration: none;
 			&:hover {
-				background: #ffcb05;
+				background: $yellow;
 				cursor: pointer;
 			}
 		}
@@ -85,7 +87,7 @@ main {
 			text-decoration: none;
 		}
 		span:hover {
-			background: #ffcb05;
+			background: $yellow;
 		}
 		@media screen and (max-width: 568px) {
 			flex-direction: column-reverse;
@@ -98,7 +100,7 @@ main {
 	}
 	.ShowPokemonsByType {
 		display: flex;
-		color: #ffcb05;
+		color: $yellow;
 	}
 	.LinkGoBack {
 		text-decoration: none;
@@ -109,17 +111,13 @@ main {
 		padding: 10px;
 		border-radius: 10px;
 		min-width: 200px;
-		border: 2px solid #ffcb05;
+		border: 2px solid $yellow;
 		background: #fff;
 		text-transform: uppercase;
 		&:hover {
 			color: #fff;
-			background: #49a6e9;
+			background: $blue;
 			border: 0;
 		}
-	}
-	.ModalPopUp {
-		text-align: center;
-		background: red;
 	}
 }

@@ -4,21 +4,21 @@ import Loader from "../UI/Loader/Loader";
 import axiosPokemons from "../../../axios/axiosPokemons";
 import { Link } from "react-router-dom";
 import Filters from "../Filters/Filters";
-import InfiniteScroll from "react-infinite-scroll-component";
+import Pagination from "../Pagination/Pagination";
 
 function Pokemons() {
 	const [pokemons, setPokemons] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchByName, setSearchByName] = useState("");
-	const [types, setTypes] = useState([]);
-	// const [page, setPage] = useState(1);
+	const [searchByType, setSearchByType] = useState("");
+	const [currentPage, setCurrentPage] = useState(1);
+	const [postsPerPage, setPostsPerPage] = useState(21);
 
 	useEffect(() => {
 		setIsLoading(true);
 		axiosPokemons
 			.get("pokemon?limit=151")
 			.then((res) => {
-				console.log(res);
 				setPokemons(res.data.results);
 				setIsLoading(false);
 			})
@@ -28,35 +28,51 @@ function Pokemons() {
 			});
 	}, []);
 
-	const filterName = pokemons.filter((pokemon) => {
-		return pokemon.name.toLowerCase().includes(searchByName.toLowerCase());
-	});
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	// const currentPosts = pokemons.slice(indexOfFirstPost, indexOfLastPost);
+	const pageNumbers = [];
+	const totalPokemons = pokemons.length;
+	for (let i = 1; i <= Math.ceil(totalPokemons / postsPerPage); i++) {
+		pageNumbers.push(i);
+	}
 
-	let pokemonList = filterName.map((pokemon) => {
-		return (
-			<Link
-				to={`/pokemon/${pokemon.name}`}
-				className={classes.Pokemon}
-				key={pokemon.name}
-			>
-				<p className={classes.PokemonTitle}>{pokemon.name}</p>
-			</Link>
-		);
-	});
+	const paginate = (pageNumber) => {
+		setCurrentPage(pageNumber);
+	};
+
+	let filterName = pokemons
+		.filter((pokemon) =>
+			pokemon.name.toLowerCase().includes(searchByName.toLowerCase())
+		)
+		.map((pokemon) => {
+			return (
+				<Link
+					to={`/pokemon/${pokemon.name}`}
+					className={classes.Pokemon}
+					key={pokemon.name}
+				>
+					<p className={classes.PokemonTitle}>{pokemon.name}</p>
+				</Link>
+			);
+		});
+
+	let pokemonList = pokemons
+		.slice(indexOfFirstPost, indexOfLastPost)
+		.map((pokemon) => {
+			return (
+				<Link
+					to={`/pokemon/${pokemon.name}`}
+					className={classes.Pokemon}
+					key={pokemon.name}
+				>
+					<p className={classes.PokemonTitle}>{pokemon.name}</p>
+				</Link>
+			);
+		});
 
 	return (
 		<>
-			{/* <InfiniteScroll
-				dataLength={pokemons.length}
-				next={fetchData}
-				hasMore={true}
-				loader={<h4>Loading...</h4>}
-				endMessage={
-					<p style={{ textAlign: "center" }}>
-						<b>Yay! You have seen it all</b>
-					</p>
-				}
-			> */}
 			<div className={classes.FilterOptions}>
 				<div className={classes.FiltersFormBlock}>
 					<label className={classes.FilterLabel}>Search:</label>
@@ -67,29 +83,40 @@ function Pokemons() {
 						onChange={(event) => setSearchByName(event.target.value)}
 					></input>
 				</div>
-				<div className={classes.FiltersFormBlock}>
-					<label className={classes.FilterLabel}>Type:</label>
-					<select className={classes.FilterInput}>
-						<option value="0">All</option>
-						{/* {filterType} */}
-					</select>
-				</div>
-				<div className={classes.FiltersFormBlock}>
-					<label className={classes.FilterLabel}>Ability:</label>
-					<select className={classes.FilterInput}>
-						<option value="0">All</option>
-						<option>Pokemon 2</option>
-						<option>Pokemon 3</option>
-						<option>Pokemon 4</option>
-					</select>
-				</div>
 			</div>
-
 			<div className={classes.Pokemons}>
-				{isLoading ? <Loader /> : pokemonList}
+				{isLoading ? (
+					<Loader />
+				) : searchByName === "" ? (
+					pokemonList
+				) : filterName.length > 0 ? (
+					filterName
+				) : (
+					<span className={classes.Message}>no match</span>
+				)}
 			</div>
-			{/* </InfiniteScroll> */}
+			<div className={classes.Pagination}>
+				{pageNumbers.map((number) => {
+					return (
+						<span key={number}>
+							<a onClick={() => paginate(number)} href="#">
+								{number}
+							</a>
+						</span>
+					);
+				})}
+			</div>
 		</>
+
+		// {isLoading ? (
+		// 		<Loader />
+		// 	) : pokemonList.length === 0 ? (
+		// 		<span className={classes.Message}>
+		// 			No pokemon match with that name
+		// 		</span>
+		// 	) : (
+		// 		pokemonList
+		// 	)}
 	);
 }
 
