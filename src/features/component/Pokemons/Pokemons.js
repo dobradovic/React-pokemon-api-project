@@ -3,14 +3,11 @@ import classes from "./Pokemons.module.scss";
 import Loader from "../UI/Loader/Loader";
 import axiosPokemons from "../../../axios/axiosPokemons";
 import { Link } from "react-router-dom";
-import Filters from "../Filters/Filters";
-import Pagination from "../Pagination/Pagination";
 
 function Pokemons() {
 	const [pokemons, setPokemons] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchByName, setSearchByName] = useState("");
-	const [searchByType, setSearchByType] = useState("");
 	const [currentPage, setCurrentPage] = useState(1);
 	const [postsPerPage, setPostsPerPage] = useState(21);
 
@@ -30,7 +27,6 @@ function Pokemons() {
 
 	const indexOfLastPost = currentPage * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
-	// const currentPosts = pokemons.slice(indexOfFirstPost, indexOfLastPost);
 	const pageNumbers = [];
 	const totalPokemons = pokemons.length;
 	for (let i = 1; i <= Math.ceil(totalPokemons / postsPerPage); i++) {
@@ -107,16 +103,6 @@ function Pokemons() {
 				})}
 			</div>
 		</>
-
-		// {isLoading ? (
-		// 		<Loader />
-		// 	) : pokemonList.length === 0 ? (
-		// 		<span className={classes.Message}>
-		// 			No pokemon match with that name
-		// 		</span>
-		// 	) : (
-		// 		pokemonList
-		// 	)}
 	);
 }
 
