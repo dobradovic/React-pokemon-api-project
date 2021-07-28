@@ -151,7 +151,7 @@ function Pokemon(props) {
 				)}
 
 				<a href="/" className={classes.LinkGoBack}>
-					<button className={classes.BtnGoBack}>Go back</button>
+					<button className={classes.BtnGoBack}>Go back!</button>
 				</a>
 			</main>
 		</>
